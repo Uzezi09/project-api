@@ -15,10 +15,9 @@ const updateUsers = (req, res) => {
           user.lastname = updateDataObj.lastname ? updateDataObj.lastname : user.lastname;
           user.password = updateDataObj.password ? updateDataObj.password : user.password;
 
-          res.json({ msg: 'User Update'});
+          res.json({ msg: 'User Update', users});
         }
       });
-    return;
   } 
   
   if (!check) {

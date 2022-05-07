@@ -22,7 +22,26 @@ const users = [
     "isadmin": false,
   }
 ]
-const party = []
+const party = [
+  {
+    "id": 0,
+    "name": "PDP",
+    "hqAddress": "Abuja Nigeria",
+    "logoUrl": "logo"
+  },
+  {
+    "id": 1,
+    "name": "APC",
+    "hqAddress": "Abuja Nigeria",
+    "logoUrl": "logo"
+  },
+  {
+    "id": 2,
+    "name": "ACCORD",
+    "hqAddress": "Abuja Nigeria",
+    "logoUrl": "logo"
+  }
+]
 const offices = []
 const candidates = []
 const vote = []

@@ -3,12 +3,15 @@ import addUsers from "../CONTROLLERS/addUsers.js"
 import deleteUsers from "../CONTROLLERS/deleteUsers.js"
 import getUsers from "../CONTROLLERS/getUsers.js"
 import updateUsers from "../CONTROLLERS/updateUsers.js"
+import getAllUsers from "../CONTROLLERS/getAllUser.js"
 
 const Router = express.Router
 
 const userRouter = Router()
 
 userRouter.get('/:id', getUsers)
+
+userRouter.get('/', getAllUsers)
 
 userRouter.post('/', addUsers)
 
