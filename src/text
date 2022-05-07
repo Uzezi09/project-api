@@ -1,0 +1,163 @@
+const member = [
+  {
+    "id": 0,
+    "name": "maureen",
+    "email": "123@gmail.com",
+    "status": "active"
+  },
+  {
+    "id": 1,
+    "name": "maureen",
+    "email": "123@gmail.com",
+    "status": "active"
+  },
+  {
+    "id": 2,
+    "name": "richy",
+    "email": "richy@gmail.com",
+    "status": "active"
+  }
+];
+
+// create member 
+app.post("/member", (req, res) => {
+  const newMember = {
+    id: member.length,
+    name: req.body.name,
+    email: req.body.email,
+    status: "active",
+  }
+
+  if (!req.body.email) {
+    res.json({
+      msg: 'please enter a value'
+    });
+  }
+
+  member.push(newMember);
+  res.json(member);
+});
+
+// update element 
+app.put("/member/:id", (req, res) => {
+  const updMember = req.body;
+  member.forEach(member => {
+    if (member.id === parseInt(req.params.id)) {
+      member.name = updMember.name ? updMember.name : member.name;
+      member.email = updMember.email ? updMember.email : member.email;
+
+      res.json({ msg: 'Member updated', member });
+    } else {
+      res.status(400).json({
+        msg: `no member with the id of ${req.params.id}`
+      })
+    }
+  });
+})
+
+import express, { response } from "express"
+import cors from "cors"
+
+const app = express();
+
+const PORT = process.env.PORT || 5000
+
+app.use(express.json())
+app.use(cors())
+app.use(express.urlencoded({extended: false}))
+
+const member = [
+  {
+    "id": 0,
+    "name": "maureen",
+    "email": "123@gmail.com",
+    "status": "active"
+  },
+  {
+    "id": 1,
+    "name": "maureen",
+    "email": "123@gmail.com",
+    "status": "active"
+  },
+  {
+    "id": 2,
+    "name": "richy",
+    "email": "richy@gmail.com",
+    "status": "active"
+  }
+];
+
+// create member 
+app.post("/member", (req, res) => {
+  const newMember = {
+    id: member.length,
+    name: req.body.name,
+    email: req.body.email,
+    status: "active",
+  }
+
+  if (!req.body.email) {
+    res.json({
+      msg: 'please enter a value'
+    });
+  }
+
+  member.push(newMember);
+  res.json(member);
+});
+
+// update member 
+app.put("/member/:id", (req, res) => {
+  
+  const updMember = req.body;
+  member.forEach(member => {
+    if (member.id === parseInt(req.params.id)) {
+      member.name = updMember.name ? updMember.name : member.name;
+      member.email = updMember.email ? updMember.email : member.email;
+
+      res.json({ msg: 'Member updated', member });
+    } else {
+      res.status(400).json({
+        msg: `no member with the id of ${req.params.id}`
+      })
+    }
+  });
+})
+// app.put("/member/:id", (req, res) => {
+//   const updMember = req.body;
+//   // return res.json(updMember)
+//  let updated = false
+//   member.forEach(item => {
+//     if (item.id === parseInt(req.params.id)) {
+//       item.name = updMember.name ? updMember.name : item.name;
+//       item.email = updMember.email ? updMember.email : item.email;
+
+//       // res.json({ msg: 'Member updated', member });
+//       updated = true;
+//     }
+//   });
+//   if (updated) {
+//     res.json({ msg: 'Member updated', member });
+//   } else {
+//     res.status(400).json({
+//       msg: `no member with the id of ${req.params.id}`
+//     })
+//   }
+// })
+
+// delete a member 
+app.delete("/member/:id", (req, res) => {
+  const found = member.some(item => item.id === parseInt(req.params.id));
+  if (found) {
+    res.json({ msg: 'member delete', member: member.filter(member => member.id !== parseInt(req.params.id)) });
+  } else {
+    res.status(400).json({
+      msg: `no member with the id of ${req.params.id}`
+    });
+  }
+
+})
+
+app.listen(PORT, () => {
+  console.log(`server is running on http://localhost:${PORT}`)
+})
