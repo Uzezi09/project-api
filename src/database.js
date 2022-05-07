@@ -42,7 +42,18 @@ const party = [
     "logoUrl": "logo"
   }
 ]
-const offices = []
+const offices = [
+  {
+    "id": 0,
+    "type": "Local Government",
+    "name": "chairman"
+  },
+  {
+    "id": 1,
+    "type": "Federal",
+    "name": "President"
+  }
+]
 const candidates = []
 const vote = []
 const petition = []
