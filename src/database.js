@@ -54,7 +54,20 @@ const offices = [
     "name": "President"
   }
 ]
-const candidates = []
+const candidates = [
+  {
+    "id": 0,
+    "office": 4,
+    "party": 56,
+    "candidate": 67,
+  },
+  {
+    "id": 1,
+    "office": 678,
+    "party": 856,
+    "candidate": 7,
+  }
+]
 const vote = []
 const petition = []
 
