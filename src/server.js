@@ -5,6 +5,7 @@ import partyRouter from "./ROUTES/partyRouter.js";
 import officeRouter from "./ROUTES/officeRouter.js";
 import candidateRouter from "./ROUTES/candidateRouter.js";
 import voteRouter from "./ROUTES/voteRouter.js";
+import petitionRouter from "./ROUTES/petitionRouter.js";
 
 const app = express();
 
@@ -24,6 +25,8 @@ app.use("/office", officeRouter)
 app.use("/candidate", candidateRouter)
 
 app.use("/vote", voteRouter)
+
+app.use("/petition", petitionRouter)
 
 
 

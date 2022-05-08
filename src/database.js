@@ -84,6 +84,21 @@ const votes = [
     "candidate": 789,
   }
 ]
-const petition = []
+const petitions = [
+  {
+    "id": 0,
+    "createdOn": Date.now(),
+    "createdBy": 34,
+    "office": 67,
+    "body": "hello",
+  },
+  {
+    "id": 1,
+    "createdOn": Date.now(),
+    "createdBy": 93,
+    "office": 62,
+    "body": "world",
+  }
+]
 
-export { users, party, offices, candidates, votes, petition }
+export { users, party, offices, candidates, votes, petitions }
