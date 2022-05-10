@@ -15,13 +15,19 @@ const updateVote = (req, res) => {
 
         vote.createdBy = parseInt(updateVoteObj.createdBy) ? parseInt(updateVoteObj.createdBy) : vote.createdBy;
 
-        res.json({msg: 'vote details updated', vote})
+        res.json({
+          status: 200,
+          msg: 'vote details updated', vote
+        })
       }
     });
-  }
+  } 
 
   if (!check) {
-    res.status(400).json({msg: 'Vote not found'})
+    res.status(400).json({
+      status: 400,
+      error: 'Vote not found'
+    })
   }
 
 }

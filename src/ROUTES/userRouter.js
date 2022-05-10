@@ -4,6 +4,7 @@ import deleteUsers from "../CONTROLLERS/deleteUsers.js"
 import getUsers from "../CONTROLLERS/getUsers.js"
 import updateUsers from "../CONTROLLERS/updateUsers.js"
 import getAllUsers from "../CONTROLLERS/getAllUser.js"
+import loginUser from "../CONTROLLERS/loginUser.js"
 
 const Router = express.Router
 
@@ -18,5 +19,7 @@ userRouter.post('/', addUsers)
 userRouter.put('/:id', updateUsers)
 
 userRouter.delete('/:id', deleteUsers)
+
+userRouter.post('/login', loginUser)
 
 export default userRouter

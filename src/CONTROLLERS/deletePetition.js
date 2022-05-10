@@ -3,21 +3,23 @@ import { petitions } from "../database.js"
 const deletePetition = (req, res) => {
   const id = parseInt(req.params.id)
 
-  const check = petitions.find(petition => petition.id === id)
+  for (let i=0; i < petitions.length; i++) {
+    const data = petitions[i]
+    if (data.id === id) {
+      petitions.splice(i, 1);
 
-  if (check) {
-    res.json({ msg: 'petition Deleted', petition: petitions.filter(petition => petition.id !== id) });
-
-    return;
-  }
-
-  if (!check) {
-    res.json({ msg: 'Petition id not found' });
+      return res.json({  
+        status: 200,
+        data: 'petition Deleted',
+      });
     
-    return;
-  }
+    }
+  }  
+  return res.json({
+    status: 400,
+    error: 'candidate not found'
+  });
 
-  res.json(petitions);
 }
 
 export default deletePetition

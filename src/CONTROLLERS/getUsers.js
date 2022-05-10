@@ -7,15 +7,20 @@ const getUsers = (req, res) => {
   const check = users.find((user) => user.id === id);
 
   if (check) {
-    res.json(users.filter(user => user.id === id));
+    res.json({
+      status: 200,
+      data: [users.filter(user => user.id === id)[0]]
+    });
   }
 
   if (!check) {
-    res.status(400).json({ msg: 'User id not found' });
+    res.status(400).json({
+      status: 400,
+      error: 'User id not found'
+    });
     return;
-  }
+  } 
 
-  // res.json(users)
 };
 
 

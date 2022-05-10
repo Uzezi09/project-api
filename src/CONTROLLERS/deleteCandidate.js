@@ -3,19 +3,23 @@ import { candidates } from "../database.js"
 const deleteCandidate = (req, res) => {
   const id = parseInt(req.params.id)
 
-  const check = candidates.find(candidate => candidate.id === id)
+  for (let i=0; i < candidates.length; i++) {
+    const data = candidates[i]
+    if (data.id === id) {
+      candidates.splice(i, 1);
 
-  if (check) {
-    res.json({ msg: 'candidate Deleted', Candidate: candidates.filter(candidate => candidate.id !== id) });
-
-    return;
-  }
-
-  if (!check) {
-    res.json({ msg: 'candidate not found' });
+      return res.json({  
+        status: 200,
+        data: 'candidate Deleted',
+      });
     
-    return;
-  }
+    }
+  }  
+  return res.json({
+    status: 400,
+    error: 'candidate not found'
+  });
+
 }
 
 export default deleteCandidate

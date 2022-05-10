@@ -1,4 +1,5 @@
 import { votes } from "../database.js";
+import generateToken from "../utils/generateToken.js";
 
 const addVote = (req, res) => {
   const obj = req.body;
@@ -7,27 +8,32 @@ const addVote = (req, res) => {
 
   if (!parseInt(obj.candidate)) {
     res.status(400).json({
-      message: "candidate vote id is compulsory",
+      status: 400,
+      error: "candidate vote id is compulsory",
     });
     return;
   }
 
   if (!parseInt(obj.office)) {
     res.status(400).json({
-      message: "candidate vote office is compulsory",
+      status: 400,
+      error: "candidate vote office is compulsory",
     });
     return;
   }
 
   if (!parseInt(obj.createdBy)) {
     res.status(400).json({
-      message: "createdBy is compulsory",
+      status: 400,
+      error: "createdBy is compulsory",
     });
     return;
   }
 
   if (check) {
-    res.status(400).json({ msg: 'Candidate id alredy exist' });
+    res.status(400).json({
+      status: 400,
+      error:'Candidate id alredy exist' });
     return;
   }
 
@@ -41,7 +47,13 @@ const addVote = (req, res) => {
 
   votes.push(newVote);
 
-  res.json(votes)
+  res.json({
+    status: 200,
+    data: {
+      ...newVote,
+      token: generateToken(newVote)
+    }
+  })
 }
 
 export default addVote

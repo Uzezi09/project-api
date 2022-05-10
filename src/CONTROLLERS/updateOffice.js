@@ -13,13 +13,21 @@ const updateOffice = (req, res) => {
         office.type = updateOfficeObj.type ? updateOfficeObj.type : office.type;
         office.name = updateOfficeObj.name ? updateOfficeObj.name : office.name;
 
-        res.json({msg: 'Office details updated', office})
+        res.json({
+          status: 200,
+          data: {
+            msg: 'Office details updated', office
+          }
+        })
       }
     });
-  }
+  } 
 
   if (!check) {
-    res.status(400).json({ msg: 'Office not found' })
+    res.status(400).json({
+      status: 400,
+      error: 'Office not found'
+    })
     
     return;
   }

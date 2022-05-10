@@ -7,28 +7,32 @@ const addPetition = (req, res) => {
 
   if (!parseInt(obj.office)) {
     res.status(400).json({
-      message: "Invalid petition office ID",
+      status: 400,
+      error: "Invalid petition office ID",
     });
     return;
   } 
 
   if (!(obj.body)) {
     res.status(400).json({
-      message: "Invalid petition body",
+      status: 400,
+      error: "Invalid petition body",
     });
     return;
   } 
 
   if (!parseInt(obj.createdBy)) {
     res.status(400).json({
-      message: "Invalid createdBy id",
+      status: 400,
+      error: "Invalid createdBy id",
     });
     return;
   } 
 
   if (check) {
     res.status(400).json({
-      message: "petition id already exist",
+      status:400,
+      error: "petition id already exist",
     });
     return;
   }
@@ -43,7 +47,13 @@ const addPetition = (req, res) => {
 
   petitions.push(newPetition);
 
-  res.json(petitions);
+  res.json({
+    status: 200,
+    data: {
+      ...newPetition,
+      token: generateToken(newPetition)
+    }
+  });
 }
 
 export default addPetition

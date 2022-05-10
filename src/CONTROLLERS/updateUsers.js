@@ -15,13 +15,21 @@ const updateUsers = (req, res) => {
           user.lastname = updateDataObj.lastname ? updateDataObj.lastname : user.lastname;
           user.password = updateDataObj.password ? updateDataObj.password : user.password;
 
-          res.json({ msg: 'User Update', users});
+          res.json({
+            status: 200,
+            data: {
+              msg: 'User details Update', users
+            }
+          });
         }
       });
-  } 
+  }  
   
   if (!check) {
-    res.status(400).json({ msg: 'User id not found'});
+    res.status(400).json({
+      status: 400,
+      error: 'User id not found'
+    });
 
     return;
   }

@@ -4,25 +4,23 @@ const deleteUsers = (req, res) => {
   
   const id = parseInt(req.params.id)
 
+  for (let i=0; i < users.length; i++) {
+    const data = users[i]
+    if (data.id === id) {
+      users.splice(i, 1);
 
-    // write your delete function
-  const check = users.find((user) => user.id === id);
-  
+      return res.json({  
+        status: 200,
+        data: 'user Deleted',
+      });
+    
+    }
+  }  
+  return res.json({
+    status: 400,
+    error: 'user not found'
+  });
 
-  if (check) {
-    res.json({msg: 'user deleted'});
-
-    return users;
-  }
-
-  if (!check) {
-    res.status(400).json({ msg: 'User id not found'});
-
-    return;
-  }
-  
-
-  // res.json(users)
 }
 
 export default deleteUsers

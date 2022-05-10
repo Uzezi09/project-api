@@ -7,16 +7,22 @@ const getOffice = (req, res) => {
   const check = offices.find(office => office.id === id);
   
   if (check) {
-    res.json(offices.find(office => office.id === id));
+    res.json({
+      status: 200,
+      data: [offices.find(office => office.id === id)]
+    });
   
     return;
   }
   
   if (!check) {
-    res.status(400).json({ msg: 'Office id not found' });
+    res.status(400).json({
+      status: 400,
+      error: 'Office id not found'
+    });
   
     return;
   }
-}
+} 
 
 export default getOffice

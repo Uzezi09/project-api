@@ -7,13 +7,19 @@ const getVote = (req, res) => {
 
 
   if (check) {
-    res.json(votes.filter(vote => vote.id === id));
+    res.json({
+      status: 200,
+      data: [votes.filter(vote => vote.id === id)[0]]
+    });
   }
 
   if (!check) {
-    res.status(400).json({ msg: 'Vote id not found' });
+    res.status(400).json({
+      status: 400,
+      error: 'Vote id not found'
+    });
     return;
-  }
+  } 
 }
 
 export default getVote

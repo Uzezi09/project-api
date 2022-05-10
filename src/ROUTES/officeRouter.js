@@ -1,4 +1,5 @@
 import express from "express"
+import isAdmin from "../utils/isAdmin.js"
 import getAllOffice from "../CONTROLLERS/getAllOffice.js"
 import addOffice from "../CONTROLLERS/addOffice.js"
 import getOffice from "../CONTROLLERS/getOffice.js"
@@ -12,13 +13,13 @@ const officeRouter = Router()
 
 officeRouter.get('/', getAllOffice)
 
-officeRouter.post('/', addOffice)
+officeRouter.post('/', isAdmin, addOffice)
 
 officeRouter.get('/:id', getOffice)
 
-officeRouter.put('/:id', updateOffice)
+officeRouter.put('/:id', isAdmin, updateOffice)
 
-officeRouter.delete('/:id', deleteOffice)
+officeRouter.delete('/:id', isAdmin, deleteOffice)
 
 
 export default officeRouter

@@ -17,7 +17,12 @@ const updatePetition = (req, res) => {
 
         petition.body = updatePetitionObj.body ? updatePetitionObj.body : petition.body;
 
-        res.json({ msg: 'petition details updated', petition })
+        res.json({
+          status: 200,
+          data: {
+            msg:'petition details updated', petition
+          }
+        })
         
         return;
       }
@@ -25,11 +30,14 @@ const updatePetition = (req, res) => {
   }
 
   if (!check) {
-    res.status(400).json({ msg: 'petition id not found' })
+    res.status(400).json({
+      status: 400,
+      error: 'petition id not found'
+    })
     
     return;
   }
-
+ 
 }
 
 export default updatePetition

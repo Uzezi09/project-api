@@ -161,3 +161,34 @@ app.delete("/member/:id", (req, res) => {
 app.listen(PORT, () => {
   console.log(`server is running on http://localhost:${PORT}`)
 })
+
+
+// delete office 
+
+if (check) {
+  res.json({
+    status: 400,
+    error: 'office Deleted', Offices: offices.filter(office => office.id !== id)
+  });
+
+  return;
+}
+
+if (!check) {
+  res.json({
+    status: 400,
+    error: 'Office not found'
+  });
+  
+  return;
+}
+
+
+// check vote 
+Vote.findOne({ userId: userID, partyId: partyId }).select("_id").lean().then(result => {
+  if (result) {
+      // user exists...
+  } else {
+// user does not exist
+}
+}); replace user with vote

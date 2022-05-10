@@ -1,3 +1,5 @@
+import bcrypt from "bcrypt"
+
 const users = [
   {
     "id": 0,
@@ -6,9 +8,11 @@ const users = [
     "othername": "othuke",
     "email": "frank@gmail.com",
     "phonenumber": "07012345666",
-    "password": "1234",
+    "password": bcrypt.hashSync("123456", 12),
+    // "passport": "",
     "role": "admin",
-    "isadmin": true,
+    "isAdmin": true,
+
   },
   {
     "id": 1,
@@ -17,9 +21,11 @@ const users = [
     "othername": "peter",
     "email": "bright@gmail.com",
     "phonenumber": "08123456789",
-    "password": "456",
+    "password": bcrypt.hashSync("345678", 12),
+    // "password": 456,
+    "passport": "",
     "role": "user",
-    "isadmin": false,
+    "isAdmin": false,
   }
 ]
 const party = [

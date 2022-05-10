@@ -3,32 +3,36 @@ import { candidates } from "../database.js";
 const addCandidate = (req, res) => {
   const obj = req.body;
 
-  const check = candidates.find(candidate => candidate.party === parseInt(obj.party));
+  const check = candidates.find(candidate => candidate.candidate === parseInt(obj.candidate));
 
   if (!parseInt(obj.office)) {
     res.status(400).json({
-      message: "Invalid Candidate office ID",
+      status:400,
+      error: "Invalid Candidate office ID",
     });
     return;
   } 
 
   if (!parseInt(obj.candidate)) {
     res.status(400).json({
-      message: "Invalid Candidate ID",
+      status: 400,
+      error: "Invalid Candidate ID",
     });
     return;
   } 
 
   if (!(parseInt(obj.party))) {
     res.status(400).json({
-      message: "Invalid Candidate party",
+      status: 400,
+      error: "Invalid Candidate party",
     });
     return;
   } 
 
   if (check) {
     res.status(400).json({
-      message: "candidate party already exist",
+      status: 400,
+      error: "candidate party already exist",
     });
     return;
   }
@@ -42,7 +46,13 @@ const addCandidate = (req, res) => {
 
   candidates.push(newCandidate);
 
-  res.json(candidates);
+  res.json({
+    status: 200,
+    data: {
+      ...newCandidate,
+      token: generateToken(newVote)
+    }
+  });
 }
 
 export default addCandidate

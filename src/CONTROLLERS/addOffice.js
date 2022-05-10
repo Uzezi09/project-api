@@ -7,21 +7,24 @@ const addOffice = (req, res) => {
 
   if (!addOfficeObj.type) {
     res.status(400).json({
-      message: "Office type is compulsory",
+      status: 400,
+      error: "Office type is compulsory",
     });
     return;
   }
   
   if (!addOfficeObj.name) {
     res.status(400).json({
-      message: "Office name is compulsory",
+      status: 400,
+      error: "Office name is compulsory",
     });
     return;
   }
   
   if (check) {
     res.status(400).json({
-      message: "Office name already exist",
+      status: 400,
+      error: "Office name already exist",
     });
     return;
   }
@@ -35,7 +38,13 @@ const addOffice = (req, res) => {
   
   offices.push(newOffice);
   
-  res.json(offices);
+  res.json({
+    status: 400,
+    data: {
+      ...newOffice,
+      token: generateToken(newOffice)
+    }
+  });
 
 }
 

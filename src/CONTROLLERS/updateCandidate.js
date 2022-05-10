@@ -17,11 +17,16 @@ const updateCandidate = (req, res) => {
 
         candidate.candidate = parseInt(updateCandidateObj.candidate) ? parseInt(updateCandidateObj.candidate) : candidate.candidate;
 
-        res.json({ msg: 'candidate details updated', candidate })
+        res.json({
+          status: 200,
+          data: {
+            msg: 'candidate details updated', candidate
+          }
+        })
         
         return;
       }
-    });
+    }); 
   }
 
   if (!check) {

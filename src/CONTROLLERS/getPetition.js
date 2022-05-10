@@ -6,17 +6,22 @@ const getPetition = (req, res) => {
   const check = petitions.find(petition => petition.id === id);
 
   if (check) {
-    res.json(petitions.find(petition => petition.id === id));
-
+    res.json({
+      status: 200,
+      data: [petitions.find(petition => petition.id === id)]
+    });
     return;
   }
-
+ 
   if (!check) {
-    res.status(400).json({ msg: 'Petion id not found' });
+    res.status(400).json({
+      status: 400,
+      error: 'Petion id not found'
+    });
 
     return;
   }
-  res.json(petitions)
+
 }
 
 export default getPetition

@@ -7,20 +7,25 @@ const addParty = (req, res) => {
 
   if (!addPartyObj.hqaddress) {
     res.status(400).json({
-      message: "Party headquarters address is compulsory",
+      status: 400,
+      error: "Party headquarters address is compulsory",
     });
     return;
   }
 
   if (!addPartyObj.name) {
     res.status(400).json({
-      message: "Party name is compulsory",
+      status:400,
+      error: "Party name is compulsory",
     });
     return;
   }
 
   if (check) {
-    res.json({ msg: 'Party name already exist' });
+    res.json({
+      status: 400,
+      error: 'Party name already exist'
+    });
 
     return;
   }
@@ -34,7 +39,13 @@ const addParty = (req, res) => {
   
   party.push(newParty);
   
-  res.json(party);
+  res.json({
+    status: 200,
+    data: {
+      ...newParty,
+      token: generateToken(newParty)
+    }
+  });
 
 }
 
