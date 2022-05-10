@@ -13,7 +13,7 @@ const officeRouter = Router()
 
 officeRouter.get('/', getAllOffice)
 
-officeRouter.post('/', isAdmin, addOffice)
+officeRouter.post('/',  addOffice)
 
 officeRouter.get('/:id', getOffice)
 

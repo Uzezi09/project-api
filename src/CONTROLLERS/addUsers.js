@@ -42,7 +42,7 @@ const addUsers = async (req, res) => {
     return;
   } 
 
-  if (!file.file && file.size > 5242880) {
+  if (!file) {
     res.status(400).json({
       status: 400,
       error: "file is compulsory",

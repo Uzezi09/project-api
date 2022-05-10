@@ -11,7 +11,10 @@ const deleteUsers = (req, res) => {
 
       return res.json({  
         status: 200,
-        data: 'user Deleted',
+        msg: 'user Deleted',
+        data: {
+          users
+        }
       });
     
     }

@@ -26,6 +26,19 @@ const users = [
     "passport": "",
     "role": "user",
     "isAdmin": false,
+  },
+  {
+    "id": 2,
+    "firstname": "bright",
+    "lastname": "ali",
+    "othername": "peter",
+    "email": "light@gmail.com",
+    "phonenumber": "08123456789",
+    "password": bcrypt.hashSync("345678", 12),
+    // "password": 456,
+    "passport": "",
+    "role": "user",
+    "isAdmin": false,
   }
 ]
 const party = [
@@ -52,12 +65,14 @@ const offices = [
   {
     "id": 0,
     "type": "Local Government",
-    "name": "chairman"
+    "name": "chairman",
+    "logoUrl": ""
   },
   {
     "id": 1,
     "type": "Federal",
-    "name": "President"
+    "name": "President",
+    "logoUrl": ""
   }
 ]
 const candidates = [

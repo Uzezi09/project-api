@@ -9,7 +9,7 @@ import officeRouter from "./ROUTES/officeRouter.js";
 import candidateRouter from "./ROUTES/candidateRouter.js";
 import voteRouter from "./ROUTES/voteRouter.js";
 import petitionRouter from "./ROUTES/petitionRouter.js";
-import mongoose from "mongoose"
+// import mongoose from "mongoose" 
 
 dotenv.config()
 
@@ -17,11 +17,13 @@ const app = express();
 
 const PORT = process.env.PORT || 7000
 
-const upload = multer({ dest: "upload/" });
+const upload = multer({ dest: "upload/" })
 
 app.use(express.json())
 app.use(cors())
 app.use(express.urlencoded({ extended: false }))
+
+// mongoose.connect("mongodb://localhost/project_database")
 
 
 app.use("/user", upload.single('file'), userRouter)
