@@ -18,7 +18,7 @@ partyRouter.post('/', addParty)
 
 partyRouter.delete('/:id', deleteParty)
 
-partyRouter.put('/:id', updateParty)
+partyRouter.patch('/:id', updateParty)
 
 
 export default partyRouter

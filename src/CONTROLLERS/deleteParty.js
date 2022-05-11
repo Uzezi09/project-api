@@ -10,7 +10,7 @@ const deleteParty = (req, res) => {
 
       return res.json({  
         status: 200,
-        data: 'party Deleted',
+        data:{ msg:'party Deleted', party},
       });
     
     }
