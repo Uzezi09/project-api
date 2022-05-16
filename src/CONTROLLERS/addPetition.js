@@ -1,11 +1,15 @@
 import { petitions } from "../database.js";
+import cloudinary from "../config/cloudinary.js";
+import fs from "fs"
 
-const addPetition = (req, res) => {
+
+const addPetition = async (req, res) => {
   const obj = req.body;
+  const file = req.file;
 
-  const check = petitions.find(petition => petition.createdBy === parseInt(obj.createdBy));
+  const check = petitions.find(petition => petition.createdBy === (obj.createdBy));
 
-  if (!parseInt(obj.office)) {
+  if (!(obj.office)) {
     res.status(400).json({
       status: 400,
       error: "Invalid petition office ID",
@@ -21,10 +25,18 @@ const addPetition = (req, res) => {
     return;
   } 
 
-  if (!parseInt(obj.createdBy)) {
+  if (!(obj.createdBy)) {
     res.status(400).json({
       status: 400,
       error: "Invalid createdBy id",
+    });
+    return;
+  } 
+
+  if (!file) {
+    res.status(400).json({
+      status: 400,
+      error: "file is compulsory",
     });
     return;
   } 
@@ -37,12 +49,39 @@ const addPetition = (req, res) => {
     return;
   }
 
+  let imageUrl;
+  const path = file.path;
+  const uniqueFileName = `${file.originalname}${Date.now()}`;
+
+  await cloudinary.uploader.upload(
+    path,
+    {
+      public_id: `politico/${uniqueFileName}`,
+      tags: "politico",
+    },
+    (err, image) => {
+      if(err) {
+         return res.status(400).json({
+          status: 400,
+          error: {
+            file: err.message
+          }
+        })
+      }
+   
+      fs.unlinkSync(path);
+      imageUrl = image.secure_url
+    }
+  )
+
   const newPetition = {
     id: petitions.length,
-    createdOn: obj.createdOn,
+    createdOn: Date.now(),
     createdBy: obj.createdBy,
     office: obj.office,
     body: obj.body,
+    imageUrl: imageUrl
+
   };
 
   petitions.push(newPetition);
@@ -51,7 +90,6 @@ const addPetition = (req, res) => {
     status: 200,
     data: {
       ...newPetition,
-      token: generateToken(newPetition)
     }
   });
 }

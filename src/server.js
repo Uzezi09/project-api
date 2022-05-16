@@ -30,13 +30,17 @@ app.use("/user", upload.single('file'), userRouter)
 
 app.use("/party", upload.single('file'), isAuth, partyRouter)
 
-app.use("/office", isAuth, officeRouter)
+app.use("/office", upload.single('file'), isAuth, officeRouter)
 
-app.use("/candidate", isAuth, candidateRouter)
+app.use("/candidate",upload.single('file'), isAuth, candidateRouter)
 
-app.use("/vote", isAuth, voteRouter)
+app.use("/vote", upload.single('file'), isAuth, voteRouter)
 
-app.use("/petition", isAuth, petitionRouter)
+app.use("/petition", upload.single('file'), isAuth, petitionRouter)
+
+app.get("/", (req, res) => {
+  res.json({msg: "hello"})
+})
 
 
 

@@ -1,26 +1,26 @@
 import { party } from "../database.js"
 import cloudinary from "../config/cloudinary.js";
 import fs from "fs"
-import generateToken from "../utils/generateToken.js";
 
 const addParty = async(req, res) => {
-  const addPartyObj = req.body;
+  const {name, hqAddress, id} = req.body;
   const file = req.file;
 
-  const check = party.find(parte => parte.name === addPartyObj.name);
+  const check = party.find(parte => parte.id === id);
 
-  if (!addPartyObj.hqaddress) {
+
+  if (!name) {
     res.status(400).json({
-      status: 400,
-      error: "Party headquarters address is compulsory",
+      status:400,
+      error: "Party name is compulsory",
     });
     return;
   }
 
-  if (!addPartyObj.name) {
+  if (!hqAddress) {
     res.status(400).json({
-      status:400,
-      error: "Party name is compulsory",
+      status: 400,
+      error: "Party headquarters address is compulsory",
     });
     return;
   }
@@ -49,7 +49,7 @@ const addParty = async(req, res) => {
 
   await cloudinary.uploader.upload(
     path,
-    {
+    { 
       public_id: `politico/${uniqueFileName}`,
       tags: "politico",
     },
@@ -70,8 +70,8 @@ const addParty = async(req, res) => {
 
   const newParty = {
     id: party.length,
-    name: addPartyObj.name,
-    hqaddress: addPartyObj.hqaddress,
+    name: name,
+    hqAddress: hqAddress,
     logoUrl: logoUrl,
   }
   
@@ -81,7 +81,6 @@ const addParty = async(req, res) => {
     status: 200,
     data: {
       ...newParty,
-      token: generateToken(newParty)
     }
   });
 

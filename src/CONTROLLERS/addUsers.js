@@ -42,10 +42,18 @@ const addUsers = async (req, res) => {
     return;
   } 
 
-  if (!file) {
+  if (!obj.password) {
     res.status(400).json({
       status: 400,
-      error: "file is compulsory",
+      error: "password is compulsory",
+    });
+    return;
+  } 
+
+  if (!(obj.password2 === obj.password)) {
+    res.status(400).json({
+      status: 400,
+      error: "confirm password",
     });
     return;
   } 
@@ -58,7 +66,15 @@ const addUsers = async (req, res) => {
     return;
   }
 
-  const newPassword = bcrypt.hashSync(obj.password, 12)
+  if (!file) {
+    res.status(400).json({
+      status: 400,
+      error: "file is compulsory",
+    });
+    return;
+  }
+
+  // const newPassword = bcrypt.hashSync("obj.password", 12)
 
   let passportUrl;
   const path = file.path;
@@ -68,7 +84,7 @@ const addUsers = async (req, res) => {
     path,
     {
       public_id: `politico/${uniqueFileName}`,
-      tags: "politico",
+      tags: "politico", 
     },
     (err, image) => {
       if(err) {
@@ -92,7 +108,8 @@ const addUsers = async (req, res) => {
     othername: obj.othername,
     phoneNumber: obj.phoneNumber,
     email: obj.email,
-    password: newPassword,
+    password: obj.password,
+    password2: newPassword,
     passportUrl: passportUrl,
     role: obj.role,
     isAdmin: false

@@ -14,7 +14,7 @@ const getOffice = (req, res) => {
   
     return;
   }
-  
+   
   if (!check) {
     res.status(400).json({
       status: 400,

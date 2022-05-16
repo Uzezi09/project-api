@@ -39,7 +39,7 @@ const loginUser = async(req, res) => {
     });
     return;
   }
-
+ 
   res.json({
     status: 200,
     data: {

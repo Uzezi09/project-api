@@ -21,7 +21,7 @@ userRouter.get('/', getAllUsers)
 
 userRouter.post('/', addUsers)
 
-userRouter.put('/:id', updateUsers)
+userRouter.put('/:id', updateUsers) 
 
 userRouter.delete('/:id', deleteUsers)
 

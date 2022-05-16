@@ -1,34 +1,33 @@
-import { offices } from "../database.js";
+import { offices } from '../database.js'
 import cloudinary from "../config/cloudinary.js";
 import fs from "fs"
-import generateToken from "../utils/generateToken.js";
 
 const addOffice = async (req, res) => {
-  const addOfficeObj = req.body;
+  const Obj = req.body
   const file = req.file;
 
-  const check = offices.find(office => office.name === addOfficeObj.name)
+  const check = offices.find(office => office.id === Obj.id)
 
-  if (!addOfficeObj.type) {
-    res.status(400).json({
-      status: 400,
-      error: "Office type is compulsory",
-    });
-    return;
-  }
-  
-  if (!addOfficeObj.name) {
-    res.status(400).json({
-      status: 400,
-      error: "Office name is compulsory",
-    });
-    return;
-  }
-  
   if (check) {
     res.status(400).json({
       status: 400,
-      error: "Office name already exist",
+      error: "Office id already exist",
+    });
+    return;
+  }
+
+  if (Obj.type !== "federal" && Obj.type !== "state" && Obj.type !== "local government") {
+    res.status(400).json({
+      status: 400,
+      message: "type is compulsory",
+    });
+    return;
+  }
+
+  if (!Obj.name) {
+    res.status(400).json({
+      status: 400,
+      error: "Office name is compulsory",
     });
     return;
   }
@@ -41,11 +40,12 @@ const addOffice = async (req, res) => {
     return;
   } 
 
+
   let logoUrl;
   const path = file.path;
   const uniqueFileName = `${file.originalname}${Date.now()}`;
 
-  await cloudinary.uploader.upload(
+  await cloudinary.uploader.upload( 
     path,
     {
       public_id: `politico/${uniqueFileName}`,
@@ -69,8 +69,8 @@ const addOffice = async (req, res) => {
 
   const newOffice = {
     id: offices.length,
-    type: addOfficeObj.type,
-    name: addOfficeObj.name,
+    type: Obj.type,
+    name: Obj.name,
     logoUrl: logoUrl
   }
   
@@ -79,8 +79,7 @@ const addOffice = async (req, res) => {
   res.json({
     status: 200,
     data: {
-      ...newOffice,
-      token: generateToken(newOffice)
+      ...newOffice
     }
   });
 

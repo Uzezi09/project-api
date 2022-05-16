@@ -4,9 +4,12 @@ import generateToken from "../utils/generateToken.js";
 const addVote = (req, res) => {
   const obj = req.body;
 
-  const check = votes.find((vote) => vote.candidate === parseInt(obj.candidate));
+  const voteUser = req.body
 
-  if (!parseInt(obj.candidate)) {
+  // const check = votes.find((vote) => vote.createdBy === parseInt(voteUser.id) && vote.office === (obj.office));
+  const check = votes.find((vote) => vote.createdBy === obj.createdBy && vote.office === obj.office);
+
+  if (!(obj.candidate)) {
     res.status(400).json({
       status: 400,
       error: "candidate vote id is compulsory",
@@ -14,7 +17,7 @@ const addVote = (req, res) => {
     return;
   }
 
-  if (!parseInt(obj.office)) {
+  if (!(obj.office)) {
     res.status(400).json({
       status: 400,
       error: "candidate vote office is compulsory",
@@ -22,7 +25,7 @@ const addVote = (req, res) => {
     return;
   }
 
-  if (!parseInt(obj.createdBy)) {
+  if (!(obj.createdBy)) {
     res.status(400).json({
       status: 400,
       error: "createdBy is compulsory",
@@ -33,7 +36,9 @@ const addVote = (req, res) => {
   if (check) {
     res.status(400).json({
       status: 400,
-      error:'Candidate id alredy exist' });
+      msg: 'you can only vote once for an office'
+    })
+
     return;
   }
 

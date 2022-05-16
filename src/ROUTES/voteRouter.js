@@ -17,7 +17,7 @@ voteRouter.get('/:id', getVote)
 voteRouter.post('/', addVote)
 
 voteRouter.delete('/:id', deleteVote)
-
+ 
 voteRouter.put('/:id', updateVote)
 
 
