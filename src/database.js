@@ -93,14 +93,14 @@ const candidates = [
     "id": 0,
     "office": 46,
     "party": 2,
-    "candidate": "1", 
+    "candidate": 1, 
     'logoUrl':'https://nigerianguide.com.ng/wp-content/uploads/2020/05/Top-10-Richest-Politicians-in-Nigeria.jpg'
   },
   {
     "id": 1,
     "office": 45,
     "party": 1,
-    "candidate": '0',
+    "candidate": 0,
     'logoUrl': 'https://nigerianinfopedia.com.ng/wp-content/uploads/2020/02/richest-politician-in-nigeria.jpeg'
   }
 ]
@@ -110,7 +110,7 @@ const votes = [
     "createdOn": Date.now(),
     "createdBy": 'req.user.id',
     "office": '45',
-    "candidate": '1',
+    "candidate": 1,
     'logoUrl': 'https://nigerianinfopedia.com.ng/wp-content/uploads/2020/02/richest-politician-in-nigeria.jpeg'
   },
   {
