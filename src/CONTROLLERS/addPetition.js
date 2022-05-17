@@ -7,9 +7,9 @@ const addPetition = async (req, res) => {
   const obj = req.body;
   const file = req.file;
 
-  const check = petitions.find(petition => petition.createdBy === (obj.createdBy));
+  const check = petitions.find(petition => petition.createdBy === parseInt(obj.createdBy));
 
-  if (!(obj.office)) {
+  if (!parseInt(obj.office)) {
     res.status(400).json({
       status: 400,
       error: "Invalid petition office ID",
@@ -17,7 +17,7 @@ const addPetition = async (req, res) => {
     return;
   } 
 
-  if (!(obj.body)) {
+  if (!parseInt(obj.body)) {
     res.status(400).json({
       status: 400,
       error: "Invalid petition body",
@@ -25,7 +25,7 @@ const addPetition = async (req, res) => {
     return;
   } 
 
-  if (!(obj.createdBy)) {
+  if (!parseInt(obj.createdBy)) {
     res.status(400).json({
       status: 400,
       error: "Invalid createdBy id",
