@@ -11,14 +11,14 @@ const users = [
     "password": bcrypt.hashSync("Maureen$09", 12),
     "password2": "",
     'passportUrl': '',
-    "role": "admin",
-    "isAdmin": true,
+    "role": "user",
+    "isAdmin": 'isAdmin',
 
   },
   {
     "id": 1,
     "firstname": "bright",
-    "lastname": "ali",
+    "lastname": "ali",  
     "othername": "peter",
     "email": "bright@gmail.com",
     "phonenumber": "08123456789",
@@ -91,16 +91,16 @@ const offices = [
 const candidates = [
   {
     "id": 0,
-    "office": 'President',
-    "party": 'PDP',
-    "candidate": "Atiku Abubakar", 
+    "office": 46,
+    "party": 2,
+    "candidate": "1", 
     'logoUrl':'https://nigerianguide.com.ng/wp-content/uploads/2020/05/Top-10-Richest-Politicians-in-Nigeria.jpg'
   },
   {
     "id": 1,
-    "office": 'Senate',
-    "party": 'ACCORD',
-    "candidate": 'Richard Richard',
+    "office": 45,
+    "party": 1,
+    "candidate": '0',
     'logoUrl': 'https://nigerianinfopedia.com.ng/wp-content/uploads/2020/02/richest-politician-in-nigeria.jpeg'
   }
 ]
@@ -108,16 +108,18 @@ const votes = [
   {
     "id": 0,
     "createdOn": Date.now(),
-    "createdBy": 'Maureen',
-    "office": 'federal',
-    "candidate": 'Atiku Abubakar',
+    "createdBy": 'req.user.id',
+    "office": '45',
+    "candidate": '1',
+    'logoUrl': 'https://nigerianinfopedia.com.ng/wp-content/uploads/2020/02/richest-politician-in-nigeria.jpeg'
   },
   {
     "id": 1,
     "createdOn": Date.now(),
-    "createdBy": 'Nana',
-    "office": 'state',
-    "candidate": 'Richard Richard',
+    "createdBy": 'req.user.id',
+    "office": 46,
+    "candidate": 0,
+    'logoUrl': 'https://nigerianinfopedia.com.ng/wp-content/uploads/2020/02/richest-politician-in-nigeria.jpeg'
   }
 ]
 const petitions = [
